@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Vice — Cover Art Maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">NV</span>
+    <div class="brand-words">
+      <h1>Neon Vice</h1>
+      <p>Multi-panel cover art maker. Your photos never leave this machine.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <label class="size-label" for="sizePick">Export size</label>
+    <select id="sizePick">
+      <option value="1080x1080">Square · 1080 × 1080</option>
+      <option value="1080x1350">Portrait · 1080 × 1350</option>
+      <option value="1920x1080" selected>Wide · 1920 × 1080</option>
+    </select>
+    <button id="exportBtn" class="primary" type="button">Export PNG</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="stage-wrap" id="stageWrap">
+    <div class="stage" id="stageBox">
+      <canvas id="coverCanvas" width="1920" height="1080"></canvas>
+      <p class="drop-hint" id="dropHint">Drop photos anywhere on the cover, or use “Add photos”.</p>
+    </div>
+    <p class="status-line" id="statusLine">Samples loaded. Pick a panel on the cover, then drag to pan it.</p>
+  </section>
+
+  <aside class="panel-rail">
+    <section class="card">
+      <h2>Layout</h2>
+      <div class="chip-row" id="layoutRow">
+        <button type="button" data-layout="mosaic">Mosaic · 7</button>
+        <button type="button" data-layout="poster" class="on">Poster · 4</button>
+        <button type="button" data-layout="quad">Quad · 4</button>
+        <button type="button" data-layout="trio">Trio · 3</button>
+        <button type="button" data-layout="duo">Duo · 2</button>
+        <button type="button" data-layout="solo">Solo · 1</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Photos</h2>
+      <div class="row-gap">
+        <label class="file-btn" for="photoInput">Add photos</label>
+        <input id="photoInput" type="file" accept="image/*" multiple hidden>
+        <button type="button" id="fillAllBtn">Fill all panels with selected photo</button>
+      </div>
+      <div class="tray" id="photoTray"></div>
+      <p class="fine">Tip: click a photo, then click a panel — or drag files straight onto the cover.</p>
+    </section>
+
+    <section class="card">
+      <h2>Panel <span id="panelName">1</span></h2>
+      <label class="slider-line">Zoom
+        <input id="zoomRange" type="range" min="1" max="3" step="0.01" value="1">
+      </label>
+      <div class="row-gap">
+        <button type="button" id="centreBtn">Centre photo</button>
+        <button type="button" id="cycleBtn">Next photo →</button>
+        <button type="button" id="fitToggle" aria-pressed="false">Mode: Fill</button>
+      </div>
+      <p class="fine">Drag on the cover to pan the selected panel’s photo.</p>
+    </section>
+
+    <section class="card">
+      <h2>Colour grade</h2>
+      <div class="chip-row" id="gradeRow">
+        <button type="button" data-grade="vice" class="on">Vice Sunset</button>
+        <button type="button" data-grade="neon">Neon Night</button>
+        <button type="button" data-grade="golden">Golden Hour</button>
+        <button type="button" data-grade="noir">Noir</button>
+        <button type="button" data-grade="clean">Clean</button>
+      </div>
+      <div class="toggle-line">
+        <label><input type="checkbox" id="grainToggle"> Film grain</label>
+        <label><input type="checkbox" id="vignetteToggle" checked> Vignette</label>
+        <label><input type="checkbox" id="sunToggle"> Retro sun</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Words</h2>
+      <label class="field">Title
+        <input id="titleInput" type="text" value="Neon Vice" maxlength="26">
+      </label>
+      <label class="field">Tagline
+        <input id="taglineInput" type="text" value="One city, seven stories" maxlength="48">
+      </label>
+      <label class="field">Foot line
+        <input id="footInput" type="text" value="Original fan-made cover art" maxlength="56">
+      </label>
+      <div class="row-gap">
+        <span class="size-label">Title sits</span>
+        <button type="button" id="placeTopBtn">Top</button>
+        <button type="button" id="placeBottomBtn" class="on">Bottom</button>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<script type="module" src="src/editor.js"></script>
+</body>
+</html>
